@@ -10,4 +10,14 @@ public class BookmarkTest {
         Bookmark bookmark = new Bookmark();
         Assertions.assertNotNull(bookmark);
     }
+
+    @Test
+    public void shouldAddUrlToBookmark() {
+        Bookmark bookmark = new Bookmark();
+        String url = "https://google.at";
+
+        bookmark.setUrl(url);
+
+        Assertions.assertEquals(url, bookmark.getUrl());
+    }
 }
