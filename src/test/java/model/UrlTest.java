@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 public class UrlTest {
 
     @ParameterizedTest
-    @ValueSource(strings = {"https://google.at", "https://orf.at", "www.facebook.com"})
+    @ValueSource(strings = {"https://google.at", "https://orf.at", "https://www.facebook.com"})
     public void should_successfully_validate_url(String url) {
         Assertions.assertTrue(UrlValidator.validate(url));
     }
