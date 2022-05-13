@@ -9,6 +9,6 @@ public class UrlTest {
     @ParameterizedTest
     @ValueSource(strings = {"https://google.at", "https://orf.at", "www.facebook.com"})
     public void should_successfully_validate_url(String url) {
-        Assertions.assertTrue(new UrlValidator().validate(url));
+        Assertions.assertTrue(UrlValidator.validate(url));
     }
 }
