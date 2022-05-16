@@ -24,6 +24,12 @@ public class CustomUrlTest {
         Assertions.assertEquals(url, customUrl.getUrl());
     }
 
+    @Test
+    public void shouldThrowIllegalArgumentExceptionForInvalidUrl() {
+        CustomUrl customUrl = new CustomUrl();
+        IllegalArgumentException notAValidUrl = Assertions.assertThrows(IllegalArgumentException.class, () -> customUrl.setUrl("notAValidUrl"));
+    }
+
     @ParameterizedTest
     @ValueSource(strings = {"testTag1", "123", "!$%§$!", "null"})
     public void shouldAddTagToUrl(String tag) {
