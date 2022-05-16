@@ -101,7 +101,7 @@
                         <include>**/*TestCase.java</include>
                     </includes>
                     <excludes>
-                        <exclude>**Main**</exclude>
+                        <exclude>**at.ac.fhcampuswien.ui.Main**</exclude>
                     </excludes>
 
                 </configuration>
@@ -154,12 +154,14 @@
                     </inScopeClasses>-->
                     <targetClasses>
                         <!-- Example: <param>lapr.project.model.*</param> -->
-                        <param>pt.ipp.isep.dei.examples.tdd.basic.domain.*</param>
+                        <param>at.ac.fhcampuswien.model.*</param>
+                        <param>at.ac.fhcampuswien.util.*</param>
                     </targetClasses>
 
                     <targetTests>
                         <!-- Example: <param>lapr.project.utils.*</param> -->
-                        <param>pt.ipp.isep.dei.examples.tdd.basic.domain.*</param>
+                        <param>at.ac.fhcampuswien.util.*</param>
+                        <param>at.ac.fhcampuswien.model.*</param>
                     </targetTests>
 
                     <outputFormats>

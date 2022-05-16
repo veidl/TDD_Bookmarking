@@ -1,4 +1,4 @@
-package model;
+package at.ac.fhcampuswien.util;
 
 import java.util.regex.Pattern;
 
