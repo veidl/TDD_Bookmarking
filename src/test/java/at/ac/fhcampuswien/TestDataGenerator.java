@@ -16,13 +16,15 @@ public class TestDataGenerator {
         return bookmark;
     }
 
-    public static Bookmark getValidBookmarkWithoutTag() {
+    public static Bookmark getValidBookmarkWithoutTag(String url) {
         CustomUrl customUrl = new CustomUrl();
-        customUrl.setUrl("https://google.at");
+        customUrl.setUrl(url);
 
         Bookmark bookmark = new Bookmark();
         bookmark.setCustomUrl(customUrl);
 
         return bookmark;
     }
+
+
 }
