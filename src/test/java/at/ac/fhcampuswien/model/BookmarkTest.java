@@ -21,7 +21,7 @@ public class BookmarkTest {
         customUrl.setUrl(url);
         customUrl.setTag(tag);
 
-        bookmark.setUrl(customUrl);
+        bookmark.setCustomUrl(customUrl);
 
         Assertions.assertEquals(url, bookmark.getCustomUrl().getUrl());
         Assertions.assertEquals(tag, bookmark.getCustomUrl().getTag());

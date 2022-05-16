@@ -4,14 +4,14 @@ import at.ac.fhcampuswien.util.UrlValidator;
 
 public class Bookmark {
 
-    private String url;
+    private CustomUrl url;
 
-    public String getUrl() {
+    public CustomUrl getCustomUrl() {
         return url;
     }
 
-    public void setUrl(String url) {
-        if (!UrlValidator.validate(url)) {
+    public void setCustomUrl(CustomUrl url) {
+        if (!UrlValidator.validate(url.getUrl())) {
             throw new IllegalArgumentException("Not a valid URL");
         }
         this.url = url;
