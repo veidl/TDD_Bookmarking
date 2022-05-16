@@ -2,6 +2,8 @@ package at.ac.fhcampuswien.model;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 public class BookmarkTest {
 
@@ -11,14 +13,18 @@ public class BookmarkTest {
         Assertions.assertNotNull(bookmark);
     }
 
-    @Test
-    public void shouldAddUrlToBookmark() {
+    @ParameterizedTest
+    @CsvSource(value = {"https://google.at,Tag1", "https://facebook.at,31241234", "https://google.at,§$!'\"'&$§$&§"})
+    public void shouldAddCustomUrlToBookmark(String url, String tag) {
         Bookmark bookmark = new Bookmark();
-        String url = "https://google.at";
+        CustomUrl customUrl = new CustomUrl();
+        customUrl.setUrl(url);
+        customUrl.setTag(tag);
 
-        bookmark.setUrl(url);
+        bookmark.setUrl(customUrl);
 
-        Assertions.assertEquals(url, bookmark.getUrl());
+        Assertions.assertEquals(url, bookmark.getCustomUrl().getUrl());
+        Assertions.assertEquals(tag, bookmark.getCustomUrl().getTag());
     }
 
     @Test
