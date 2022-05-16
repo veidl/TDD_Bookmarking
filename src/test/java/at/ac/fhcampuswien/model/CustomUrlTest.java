@@ -23,4 +23,13 @@ public class CustomUrlTest {
 
         Assertions.assertEquals(url, customUrl.getUrl());
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"testTag1", "123", "!$%§$!", "null"})
+    public void shouldAddTagToUrl(String tag) {
+        CustomUrl customUrl = new CustomUrl();
+        customUrl.setTag(tag);
+
+        Assertions.assertEquals(tag, customUrl.getTag());
+    }
 }
