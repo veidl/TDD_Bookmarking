@@ -9,7 +9,7 @@ pipeline {
 
     stage('Test') {
       steps {
-        sh 'mvn verify'
+        sh 'mvn verify org.pitest:pitest-maven:mutationCoverage'
       }
     }
 
