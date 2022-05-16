@@ -113,6 +113,9 @@
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>${jacoco.maven.version}</version>
                 <configuration>
+                    <excludes>
+                        <exclude>**/ui/**/*</exclude>
+                    </excludes>
                 </configuration>
                 <executions>
                     <execution>
