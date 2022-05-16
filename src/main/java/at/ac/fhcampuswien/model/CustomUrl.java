@@ -1,9 +1,14 @@
 package at.ac.fhcampuswien.model;
 
+import at.ac.fhcampuswien.util.UrlValidator;
+
 public class CustomUrl {
 
     String url;
     String tag;
+
+    public CustomUrl() {
+    }
 
     public String getTag() {
         return tag;
@@ -18,6 +23,9 @@ public class CustomUrl {
     }
 
     public void setUrl(String url) {
+        if (!UrlValidator.validate(url)) {
+            throw new IllegalArgumentException("Not a valid URL");
+        }
         this.url = url;
     }
 }

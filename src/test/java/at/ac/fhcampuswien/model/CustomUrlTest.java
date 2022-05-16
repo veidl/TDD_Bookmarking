@@ -27,7 +27,8 @@ public class CustomUrlTest {
     @Test
     public void shouldThrowIllegalArgumentExceptionForInvalidUrl() {
         CustomUrl customUrl = new CustomUrl();
-        IllegalArgumentException notAValidUrl = Assertions.assertThrows(IllegalArgumentException.class, () -> customUrl.setUrl("notAValidUrl"));
+        IllegalArgumentException exception = Assertions.assertThrows(IllegalArgumentException.class, () -> customUrl.setUrl("notAValidUrl"));
+        Assertions.assertEquals("Not a valid URL", exception.getMessage());
     }
 
     @ParameterizedTest

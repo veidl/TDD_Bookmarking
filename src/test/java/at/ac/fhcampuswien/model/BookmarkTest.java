@@ -27,11 +27,4 @@ public class BookmarkTest {
         Assertions.assertEquals(tag, bookmark.getCustomUrl().getTag());
     }
 
-    @Test
-    public void shouldThrowIllegalArgumentExceptionForInvalidUrl() {
-        CustomUrl customUrl = new CustomUrl();
-        customUrl.setUrl("notAValidUrl");
-        IllegalArgumentException exception = Assertions.assertThrows(IllegalArgumentException.class, () -> new Bookmark().setCustomUrl(customUrl));
-        Assertions.assertEquals("Not a valid URL", exception.getMessage());
-    }
 }
