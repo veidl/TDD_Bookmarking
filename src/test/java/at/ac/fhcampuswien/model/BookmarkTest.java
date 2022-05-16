@@ -31,9 +31,9 @@ public class BookmarkTest {
     public void shouldIncreaseRating() {
         Bookmark bookmark = new Bookmark();
 
-        int actual = bookmark.increaseRating();
+        bookmark.increaseRating();
 
-        Assertions.assertEquals(1, actual);
+        Assertions.assertEquals(1, bookmark.getRating());
     }
 
 
