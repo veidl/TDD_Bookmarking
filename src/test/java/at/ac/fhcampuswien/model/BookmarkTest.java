@@ -27,4 +27,14 @@ public class BookmarkTest {
         Assertions.assertEquals(tag, bookmark.getCustomUrl().getTag());
     }
 
+    @Test
+    public void shouldIncreaseRating() {
+        Bookmark bookmark = new Bookmark();
+
+        int actual = bookmark.increaseRating();
+
+        Assertions.assertEquals(1, actual);
+    }
+
+
 }
