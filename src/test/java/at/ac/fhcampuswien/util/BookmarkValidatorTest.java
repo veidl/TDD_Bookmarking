@@ -21,9 +21,9 @@ public class BookmarkValidatorTest {
         List<Bookmark> bookmarks = Collections.singletonList(validBookmarkWithTag);
         Bookmark validBookmarkWithoutTag = TestDataGenerator.getValidBookmarkWithoutTag(validBookmarkWithTag.getCustomUrl().getUrl());
 
-        boolean actual = BookmarkValidator.isValid(bookmarks, validBookmarkWithoutTag);
+        int actual = BookmarkValidator.isValid(bookmarks, validBookmarkWithoutTag);
 
-        Assertions.assertTrue(actual);
+        Assertions.assertEquals(-1,actual);
     }
 
     @Test
@@ -31,8 +31,8 @@ public class BookmarkValidatorTest {
         List<Bookmark> bookmarks = Collections.singletonList(TestDataGenerator.getValidBookmarkWithTag());
         Bookmark validBookmarkWithoutTag = TestDataGenerator.getValidBookmarkWithoutTag("https://orf.at");
 
-        boolean actual = BookmarkValidator.isValid(bookmarks, validBookmarkWithoutTag);
+        int actual = BookmarkValidator.isValid(bookmarks, validBookmarkWithoutTag);
 
-        Assertions.assertFalse(actual);
+        Assertions.assertEquals(0,actual);
     }
 }
