@@ -5,18 +5,18 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-public class CustomUrlTest {
+class CustomUrlTest {
 
 
     @Test
-    public void shouldCreateCustomUrl() {
+    void shouldCreateCustomUrl() {
         CustomUrl customUrl = new CustomUrl();
         Assertions.assertNotNull(customUrl);
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"https://orf.at", "https://twitter.com", "https://www.google.at"})
-    public void shouldAddValidUrl(String url) {
+    void shouldAddValidUrl(String url) {
         CustomUrl customUrl = new CustomUrl();
 
         customUrl.setUrl(url);
@@ -25,7 +25,7 @@ public class CustomUrlTest {
     }
 
     @Test
-    public void shouldThrowIllegalArgumentExceptionForInvalidUrl() {
+    void shouldThrowIllegalArgumentExceptionForInvalidUrl() {
         CustomUrl customUrl = new CustomUrl();
         IllegalArgumentException exception = Assertions.assertThrows(IllegalArgumentException.class, () -> customUrl.setUrl("notAValidUrl"));
         Assertions.assertEquals("Not a valid URL", exception.getMessage());
@@ -33,7 +33,7 @@ public class CustomUrlTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"testTag1", "123", "!$%§$!", "null"})
-    public void shouldAddTagToUrl(String tag) {
+    void shouldAddTagToUrl(String tag) {
         CustomUrl customUrl = new CustomUrl();
         customUrl.setTag(tag);
 

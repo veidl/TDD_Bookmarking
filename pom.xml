@@ -54,16 +54,6 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Javadoc plugin does not require to be explicitly stated-->
-        <!-- Maven goal: mvn clean javadoc:javadoc javadoc:test-javadoc -->
-        <!--
-        <dependency>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-javadoc-plugin</artifactId>
-            <version>3.0.0</version>
-            <scope>compile</scope>
-        </dependency>-->
-
     </dependencies>
 
     <build>
@@ -147,19 +137,12 @@
                     </dependency>
                 </dependencies>
                 <configuration>
-                    <!--<timestampedReports>false</timestampedReports>-->
-                    <!--<inScopeClasses>
-                        <param>lapr.project.model.*</param>
-                        <param>lapr.project.utils.*</param>
-                    </inScopeClasses>-->
                     <targetClasses>
-                        <!-- Example: <param>lapr.project.model.*</param> -->
                         <param>at.ac.fhcampuswien.model.*</param>
                         <param>at.ac.fhcampuswien.util.*</param>
                     </targetClasses>
 
                     <targetTests>
-                        <!-- Example: <param>lapr.project.utils.*</param> -->
                         <param>at.ac.fhcampuswien.util.*</param>
                         <param>at.ac.fhcampuswien.model.*</param>
                     </targetTests>
@@ -168,11 +151,8 @@
                         <outputFormat>XML</outputFormat>
                         <outputFormat>HTML</outputFormat>
                     </outputFormats>
-                    <!--<verbose>true</verbose>-->
                 </configuration>
-
             </plugin>
-
         </plugins>
     </build>
 

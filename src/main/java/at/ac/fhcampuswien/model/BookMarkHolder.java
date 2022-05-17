@@ -1,5 +1,7 @@
 package at.ac.fhcampuswien.model;
 
+import at.ac.fhcampuswien.util.BookmarkValidator;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +20,13 @@ public class BookMarkHolder {
         return bookMarks;
     }
 
-    public void addBookmark(Bookmark bookMarks) {
-        this.bookMarks.add(bookMarks);
+    public void addBookmark(Bookmark bookMark) {
+        int index = BookmarkValidator.isValid(this.bookMarks, bookMark);
+
+        if (index >= 0) {
+            this.bookMarks.get(index).increaseRating();
+        } else {
+            this.bookMarks.add(bookMark);
+        }
     }
 }

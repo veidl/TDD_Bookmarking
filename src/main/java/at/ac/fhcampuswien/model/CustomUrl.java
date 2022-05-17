@@ -8,6 +8,8 @@ public class CustomUrl {
     String tag;
 
     public CustomUrl() {
+        this.url = null;
+        this.tag = null;
     }
 
     public String getTag() {
