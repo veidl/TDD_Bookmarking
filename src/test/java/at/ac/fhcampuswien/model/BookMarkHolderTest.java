@@ -3,6 +3,8 @@ package at.ac.fhcampuswien.model;
 import at.ac.fhcampuswien.TestDataGenerator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 class BookMarkHolderTest {
 
@@ -46,16 +48,16 @@ class BookMarkHolderTest {
         Assertions.assertEquals(2, bookMarkHolder.getBookMarkCount());
     }
 
-    @Test
-    void shouldFilterBookMarksBasedOnTag() {
+    @ParameterizedTest
+    @CsvSource(value = {"https://facebook.com,myTag,2", "https://orf.at,tag2,1", "file://test.at,cool,1"})
+    void shouldFilterBookMarksBasedOnTag(String url, String tag, int result) {
         BookMarkHolder bookMarkHolder = new BookMarkHolder();
-
 
         Bookmark validBookmarkWithTag = TestDataGenerator.getValidBookmarkWithTag();
         bookMarkHolder.addBookmark(validBookmarkWithTag);
-        bookMarkHolder.addBookmark(TestDataGenerator.getValidBookmarkWithoutTag("https://test.at"));
+        bookMarkHolder.addBookmark(TestDataGenerator.getCustomBookmark(url, tag));
 
-        Assertions.assertEquals(validBookmarkWithTag, bookMarkHolder.getBookmarksByTag("myTag"));
-
+        Assertions.assertEquals(2, bookMarkHolder.getBookMarkCount());
+        Assertions.assertEquals(result, bookMarkHolder.getBookmarksByTag(tag).size());
     }
 }

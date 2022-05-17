@@ -5,6 +5,7 @@ import at.ac.fhcampuswien.util.UrlValidator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class BookMarkHolder {
     private final List<Bookmark> bookMarks;
@@ -32,9 +33,15 @@ public class BookMarkHolder {
     }
 
     public int getSecureUrlCount() {
-       return (int) this.bookMarks.stream()
-               .map(bookmark -> bookmark.getCustomUrl().getUrl())
-               .filter(UrlValidator::isSecureUrl)
-               .count();
+        return (int) this.bookMarks.stream()
+                .map(bookmark -> bookmark.getCustomUrl().getUrl())
+                .filter(UrlValidator::isSecureUrl)
+                .count();
+    }
+
+    public List<Bookmark> getBookmarksByTag(String myTag) {
+        return this.bookMarks.stream()
+                .filter(bookmark -> bookmark.getCustomUrl().getTag().equals(myTag))
+                .collect(Collectors.toList());
     }
 }
