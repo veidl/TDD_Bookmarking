@@ -6,6 +6,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.Arrays;
+import java.util.Collections;
+
 class BookMarkHolderTest {
 
     @Test
@@ -58,6 +61,32 @@ class BookMarkHolderTest {
         bookMarkHolder.addBookmark(TestDataGenerator.getCustomBookmark(url, tag));
 
         Assertions.assertEquals(2, bookMarkHolder.getBookMarkCount());
-        Assertions.assertEquals(result, bookMarkHolder.getBookmarksByTag(tag).size());
+        Assertions.assertEquals(result, bookMarkHolder.getBookmarksByTag(Collections.singletonList(tag)).size());
     }
+
+    @Test
+    void shouldFilterBookMarksBasedOnMultipleTags() {
+        BookMarkHolder bookMarkHolder = new BookMarkHolder();
+
+        Bookmark validBookmarkWithTag = TestDataGenerator.getValidBookmarkWithTag();
+        bookMarkHolder.addBookmark(validBookmarkWithTag);
+        bookMarkHolder.addBookmark(TestDataGenerator.getCustomBookmark("https://orf.at", "mySecondTag"));
+
+        Assertions.assertEquals(2, bookMarkHolder.getBookMarkCount());
+        Assertions.assertEquals(2, bookMarkHolder.getBookmarksByTag(Arrays.asList("mySecondTag", "myTag")).size());
+    }
+
+    @Test
+    void shouldFindNoBookmarkWhenTagIsNotPresent() {
+        BookMarkHolder bookMarkHolder = new BookMarkHolder();
+
+        Bookmark validBookmarkWithTag = TestDataGenerator.getValidBookmarkWithTag();
+        bookMarkHolder.addBookmark(validBookmarkWithTag);
+        bookMarkHolder.addBookmark(TestDataGenerator.getCustomBookmark("https://orf.at", "mySecondTag"));
+
+        Assertions.assertEquals(2, bookMarkHolder.getBookMarkCount());
+        Assertions.assertEquals(0, bookMarkHolder.getBookmarksByTag(Arrays.asList("hugo", "hugo2")).size());
+    }
+
+
 }

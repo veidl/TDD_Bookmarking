@@ -39,9 +39,9 @@ public class BookMarkHolder {
                 .count();
     }
 
-    public List<Bookmark> getBookmarksByTag(String myTag) {
+    public List<Bookmark> getBookmarksByTag(List<String> myTag) {
         return this.bookMarks.stream()
-                .filter(bookmark -> bookmark.getCustomUrl().getTag().equals(myTag))
+                .filter(bookmark -> myTag.contains(bookmark.getCustomUrl().getTag()))
                 .collect(Collectors.toList());
     }
 }
