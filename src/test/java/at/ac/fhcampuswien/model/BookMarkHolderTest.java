@@ -88,4 +88,16 @@ class BookMarkHolderTest {
         Assertions.assertEquals(0, bookMarkHolder.getBookmarksByTag(Arrays.asList("hugo", "hugo2")).size());
     }
 
+    @Test
+    void shouldAddBookMarkToAssociateListForSameDomain() {
+        BookMarkHolder bookMarkHolder = new BookMarkHolder();
+
+        Bookmark validBookmarkWithTag = TestDataGenerator.getValidBookmarkWithTag();
+        bookMarkHolder.addBookmark(validBookmarkWithTag);
+        bookMarkHolder.addBookmark(TestDataGenerator.getCustomBookmark("https://google.at/mySubDirectory", "mySecondTag"));
+
+        Assertions.assertEquals(2, bookMarkHolder.getBookMarkCount());
+        Assertions.assertEquals(1, bookMarkHolder.getAssociatedBookMarksMap());
+    }
+
 }

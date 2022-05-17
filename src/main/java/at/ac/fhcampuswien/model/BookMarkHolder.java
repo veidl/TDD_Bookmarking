@@ -2,6 +2,7 @@ package at.ac.fhcampuswien.model;
 
 import at.ac.fhcampuswien.util.BookmarkValidator;
 import at.ac.fhcampuswien.util.UrlValidator;
+import jdk.internal.util.xml.impl.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
