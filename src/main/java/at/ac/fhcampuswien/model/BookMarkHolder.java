@@ -34,7 +34,7 @@ public class BookMarkHolder {
     public int getSecureUrlCount() {
        return (int) this.bookMarks.stream()
                .map(bookmark -> bookmark.getCustomUrl().getUrl())
-               .map(UrlValidator::isSecureUrl)
+               .filter(UrlValidator::isSecureUrl)
                .count();
     }
 }
