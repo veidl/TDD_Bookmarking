@@ -88,5 +88,4 @@ class BookMarkHolderTest {
         Assertions.assertEquals(0, bookMarkHolder.getBookmarksByTag(Arrays.asList("hugo", "hugo2")).size());
     }
 
-
 }

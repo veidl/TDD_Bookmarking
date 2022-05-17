@@ -1,13 +1,17 @@
 package at.ac.fhcampuswien.util;
 
+import at.ac.fhcampuswien.model.Bookmark;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
+import java.util.Arrays;
+import java.util.Collections;
 
 class UrlValidatorTest {
     @Test
@@ -40,5 +44,10 @@ class UrlValidatorTest {
     @ValueSource(strings = {"http://google.at", "ftp://orf.at", "file://www.facebook.com", "www.twitter.com"})
     void shouldFailForInvalidateSecureUrl(String url) {
         Assertions.assertFalse(UrlValidator.isSecureUrl(url));
+    }
+    @ParameterizedTest
+    @CsvSource(value = "https://google.at,ftp://google.com")
+    void shouldAssociateUrlBasedOnDomain(String a, String b) {
+        Assertions.assertTrue(UrlValidator.isAssociatedWithAnyUrl(Collections.singletonList(a), b));
     }
 }
