@@ -4,13 +4,17 @@ import at.ac.fhcampuswien.util.BookmarkValidator;
 import at.ac.fhcampuswien.util.UrlValidator;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class BookMarkHolder {
     private final List<Bookmark> bookMarks;
+    private final Map<Bookmark, Bookmark> associatedBookmarks;
 
     public BookMarkHolder() {
+        this.associatedBookmarks = new HashMap<>();
         this.bookMarks = new ArrayList<>();
     }
 
@@ -28,6 +32,11 @@ public class BookMarkHolder {
         if (index >= 0) {
             this.bookMarks.get(index).increaseRating();
         } else {
+            this.bookMarks.forEach(bookmark -> {
+                if (UrlValidator.isAssociatedWithAnyUrl(bookmark.getCustomUrl().getUrl(), bookMark.getCustomUrl().getUrl())) {
+                    this.associatedBookmarks.put(bookmark, bookMark);
+                }
+            });
             this.bookMarks.add(bookMark);
         }
     }
@@ -43,5 +52,10 @@ public class BookMarkHolder {
         return this.bookMarks.stream()
                 .filter(bookmark -> myTag.contains(bookmark.getCustomUrl().getTag()))
                 .collect(Collectors.toList());
+    }
+
+    public Map<Bookmark, Bookmark> getAssociatedBookMarksMap() {
+        return this.associatedBookmarks;
+
     }
 }
