@@ -16,9 +16,20 @@ public class TestDataGenerator {
         return bookmark;
     }
 
+    public static Bookmark getCustomBookmark(String url, String tag) {
+        CustomUrl customUrl = new CustomUrl();
+        customUrl.setUrl(url);
+        customUrl.setTag(tag);
+
+        Bookmark bookmark = new Bookmark();
+        bookmark.setCustomUrl(customUrl);
+        return bookmark;
+    }
+
     public static Bookmark getValidBookmarkWithoutTag(String url) {
         CustomUrl customUrl = new CustomUrl();
         customUrl.setUrl(url);
+        customUrl.setTag("tag2");
 
         Bookmark bookmark = new Bookmark();
         bookmark.setCustomUrl(customUrl);
