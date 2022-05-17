@@ -95,9 +95,12 @@ class BookMarkHolderTest {
         Bookmark validBookmarkWithTag = TestDataGenerator.getValidBookmarkWithTag();
         bookMarkHolder.addBookmark(validBookmarkWithTag);
         bookMarkHolder.addBookmark(TestDataGenerator.getCustomBookmark("https://google.at/mySubDirectory", "mySecondTag"));
+        bookMarkHolder.addBookmark(TestDataGenerator.getCustomBookmark("https://orf.at/vogel", "mySecondTag"));
+        bookMarkHolder.addBookmark(TestDataGenerator.getCustomBookmark("https://orf.at/testinger", "mySecondTag"));
+        bookMarkHolder.addBookmark(TestDataGenerator.getCustomBookmark("https://news.vogle.at/testinger", "mySecondTag"));
 
-        Assertions.assertEquals(2, bookMarkHolder.getBookMarkCount());
-        Assertions.assertEquals(1, bookMarkHolder.getAssociatedBookMarksMap());
+        Assertions.assertEquals(5, bookMarkHolder.getBookMarkCount());
+        Assertions.assertEquals(2, bookMarkHolder.getAssociatedBookMarksMap().size());
     }
 
 }
