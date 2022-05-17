@@ -37,8 +37,8 @@ class UrlValidatorTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"http://google.at", "ftp://orf.at", "file://www.facebook.com"})
-    void shouldFailInvalidateSecureUrl(String url) {
+    @ValueSource(strings = {"http://google.at", "ftp://orf.at", "file://www.facebook.com", "www.twitter.com"})
+    void shouldFailForInvalidateSecureUrl(String url) {
         Assertions.assertFalse(UrlValidator.isSecureUrl(url));
     }
 }

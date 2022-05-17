@@ -16,7 +16,7 @@ public class UrlValidator {
     }
 
     public static boolean isSecureUrl(String url) {
-        return validate(url) && url.startsWith("https");
+        return url.startsWith("https");
     }
 
 }

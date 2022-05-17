@@ -40,8 +40,9 @@ class BookMarkHolderTest {
         BookMarkHolder bookMarkHolder = new BookMarkHolder();
 
         bookMarkHolder.addBookmark(TestDataGenerator.getValidBookmarkWithTag());
-        bookMarkHolder.addBookmark(TestDataGenerator.getValidBookmarkWithTag());
+        bookMarkHolder.addBookmark(TestDataGenerator.getValidBookmarkWithoutTag("https://facebook.com"));
 
         Assertions.assertEquals(2, bookMarkHolder.getSecureUrlCount());
+        Assertions.assertEquals(2, bookMarkHolder.getBookMarkCount());
     }
 }
