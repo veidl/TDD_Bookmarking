@@ -35,4 +35,10 @@ class UrlValidatorTest {
     void shouldSuccessfullyValidateSecureUrl(String url) {
         Assertions.assertTrue(UrlValidator.isSecureUrl(url));
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"http://google.at", "ftp://orf.at", "file://www.facebook.com"})
+    void shouldFailInvalidateSecureUrl(String url) {
+        Assertions.assertFalse(UrlValidator.isSecureUrl(url));
+    }
 }
