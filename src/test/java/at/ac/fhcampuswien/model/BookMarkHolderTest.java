@@ -45,4 +45,17 @@ class BookMarkHolderTest {
         Assertions.assertEquals(2, bookMarkHolder.getSecureUrlCount());
         Assertions.assertEquals(2, bookMarkHolder.getBookMarkCount());
     }
+
+    @Test
+    void shouldFilterBookMarksBasedOnTag() {
+        BookMarkHolder bookMarkHolder = new BookMarkHolder();
+
+
+        Bookmark validBookmarkWithTag = TestDataGenerator.getValidBookmarkWithTag();
+        bookMarkHolder.addBookmark(validBookmarkWithTag);
+        bookMarkHolder.addBookmark(TestDataGenerator.getValidBookmarkWithoutTag("https://test.at"));
+
+        Assertions.assertEquals(validBookmarkWithTag, bookMarkHolder.getBookmarksByTag("myTag"));
+
+    }
 }
