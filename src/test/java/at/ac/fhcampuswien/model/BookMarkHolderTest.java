@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.Arrays;
+
 class BookMarkHolderTest {
 
     @Test
@@ -60,4 +62,18 @@ class BookMarkHolderTest {
         Assertions.assertEquals(2, bookMarkHolder.getBookMarkCount());
         Assertions.assertEquals(result, bookMarkHolder.getBookmarksByTag(tag).size());
     }
+
+    @Test
+    void shouldFilterBookMarksBasedOnMultipleTags() {
+        BookMarkHolder bookMarkHolder = new BookMarkHolder();
+
+        Bookmark validBookmarkWithTag = TestDataGenerator.getValidBookmarkWithTag();
+        bookMarkHolder.addBookmark(validBookmarkWithTag);
+        bookMarkHolder.addBookmark(TestDataGenerator.getCustomBookmark("https://orf.at", "mySecondTag"));
+
+        Assertions.assertEquals(2, bookMarkHolder.getBookMarkCount());
+        Assertions.assertEquals(2, bookMarkHolder.getBookmarksByTag(Arrays.asList("mySecondTag", "myTag")).size());
+    }
+
+
 }
