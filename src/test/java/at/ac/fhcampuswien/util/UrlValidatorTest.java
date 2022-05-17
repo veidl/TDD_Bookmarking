@@ -20,7 +20,25 @@ class UrlValidatorTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"https://google.at", "https://orf.at", "https://www.facebook.com"})
-    void should_successfully_validate_url(String url) {
+    void shouldSuccessfullyValidateUrl(String url) {
         Assertions.assertTrue(UrlValidator.validate(url));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"google.at", "https:/orf.at", "https//www.facebook.com"})
+    void shouldFailForInvalidUrl(String url) {
+        Assertions.assertFalse(UrlValidator.validate(url));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"https://google.at", "https://orf.at", "https://www.facebook.com"})
+    void shouldSuccessfullyValidateSecureUrl(String url) {
+        Assertions.assertTrue(UrlValidator.isSecureUrl(url));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"http://google.at", "ftp://orf.at", "file://www.facebook.com", "www.twitter.com"})
+    void shouldFailForInvalidateSecureUrl(String url) {
+        Assertions.assertFalse(UrlValidator.isSecureUrl(url));
     }
 }

@@ -1,6 +1,7 @@
 package at.ac.fhcampuswien.model;
 
 import at.ac.fhcampuswien.util.BookmarkValidator;
+import at.ac.fhcampuswien.util.UrlValidator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,5 +29,12 @@ public class BookMarkHolder {
         } else {
             this.bookMarks.add(bookMark);
         }
+    }
+
+    public int getSecureUrlCount() {
+       return (int) this.bookMarks.stream()
+               .map(bookmark -> bookmark.getCustomUrl().getUrl())
+               .filter(UrlValidator::isSecureUrl)
+               .count();
     }
 }

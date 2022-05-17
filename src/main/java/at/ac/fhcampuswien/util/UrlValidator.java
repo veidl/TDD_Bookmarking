@@ -15,4 +15,8 @@ public class UrlValidator {
         return pattern.matcher(url).matches();
     }
 
+    public static boolean isSecureUrl(String url) {
+        return url.startsWith("https");
+    }
+
 }

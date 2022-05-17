@@ -34,4 +34,15 @@ class BookMarkHolderTest {
         Assertions.assertEquals(1, bookMarkHolder.getBookMarkCount());
         Assertions.assertEquals(1, bookMarkHolder.getBookmarks().get(0).getRating());
     }
+
+    @Test
+    void shouldIncreaseCountForSecureUrl() {
+        BookMarkHolder bookMarkHolder = new BookMarkHolder();
+
+        bookMarkHolder.addBookmark(TestDataGenerator.getValidBookmarkWithTag());
+        bookMarkHolder.addBookmark(TestDataGenerator.getValidBookmarkWithoutTag("https://facebook.com"));
+
+        Assertions.assertEquals(2, bookMarkHolder.getSecureUrlCount());
+        Assertions.assertEquals(2, bookMarkHolder.getBookMarkCount());
+    }
 }
