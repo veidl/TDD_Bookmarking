@@ -30,4 +30,8 @@ public class CustomUrl {
         }
         this.url = url;
     }
+
+    public void removeURL() {
+        this.url = null;
+    }
 }

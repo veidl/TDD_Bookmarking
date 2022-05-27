@@ -71,6 +71,6 @@ public class BookMarkHolder {
         if(i >= this.bookMarks.size()) {
             throw new UnsupportedOperationException("Out of index");
         }
-        this.bookMarks.get(i).getCustomUrl().setUrl(null);
+        this.bookMarks.get(i).getCustomUrl().removeURL();
     }
 }
