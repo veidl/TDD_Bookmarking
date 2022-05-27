@@ -39,4 +39,12 @@ class CustomUrlTest {
 
         Assertions.assertEquals(tag, customUrl.getTag());
     }
+
+    @Test
+    void shouldRemoveURL() {
+        CustomUrl customUrl = new CustomUrl();
+        customUrl.setUrl(null);
+
+        Assertions.assertNull(customUrl.getUrl());
+    }
 }
