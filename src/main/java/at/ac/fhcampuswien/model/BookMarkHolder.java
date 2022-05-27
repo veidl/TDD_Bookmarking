@@ -60,17 +60,18 @@ public class BookMarkHolder {
     }
 
     public void removeTag(int i) {
-        if(i >= this.bookMarks.size()) {
-            throw new UnsupportedOperationException("Out of index");
-        }
-
+        assertIndexInRange(i);
         this.bookMarks.get(i).getCustomUrl().setTag(null);
     }
 
     public void removeURL(int i) {
-        if(i >= this.bookMarks.size()) {
+        assertIndexInRange(i);
+        this.bookMarks.get(i).getCustomUrl().removeURL();
+    }
+
+    private void assertIndexInRange(int i) {
+        if (i >= this.bookMarks.size()) {
             throw new UnsupportedOperationException("Out of index");
         }
-        this.bookMarks.get(i).getCustomUrl().removeURL();
     }
 }
