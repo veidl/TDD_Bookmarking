@@ -120,4 +120,14 @@ class BookMarkHolderTest {
         Assertions.assertEquals("Out of index", ex.getMessage());
     }
 
+    @Test
+    void shouldRemoveURLWhenPresent() {
+        BookMarkHolder bookMarkHolder = new BookMarkHolder();
+        bookMarkHolder.addBookmark(TestDataGenerator.getValidBookmarkWithTag());
+
+        bookMarkHolder.removeURL(0);
+        Assertions.assertNull(bookMarkHolder.getBookmarks().get(0).getCustomUrl().getUrl());
+
+    }
+
 }
