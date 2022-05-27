@@ -103,4 +103,12 @@ class BookMarkHolderTest {
         Assertions.assertEquals(2, bookMarkHolder.getAssociatedBookMarksMap().size());
     }
 
+    @Test
+    void shouldRemoveTagWhenPresent() {
+        BookMarkHolder bookMarkHolder = new BookMarkHolder();
+        bookMarkHolder.addBookmark(TestDataGenerator.getValidBookmarkWithTag());
+
+        Assertions.assertNull(bookMarkHolder.getBookmarks().get(0).getCustomUrl().getTag());
+    }
+
 }
