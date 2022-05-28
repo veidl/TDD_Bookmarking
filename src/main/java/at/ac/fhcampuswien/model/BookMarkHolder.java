@@ -3,10 +3,7 @@ package at.ac.fhcampuswien.model;
 import at.ac.fhcampuswien.util.BookmarkValidator;
 import at.ac.fhcampuswien.util.UrlValidator;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class BookMarkHolder {
@@ -73,5 +70,12 @@ public class BookMarkHolder {
         if (i >= this.bookMarks.size()) {
             throw new UnsupportedOperationException("Out of index");
         }
+    }
+
+    public List<Bookmark> getBookmarksSortedByRating() {
+        return this.bookMarks.stream()
+                .sorted(Comparator.comparing(Bookmark::getRating).reversed())
+                .collect(Collectors.toList());
+
     }
 }
