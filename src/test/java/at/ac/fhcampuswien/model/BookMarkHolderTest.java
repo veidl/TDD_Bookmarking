@@ -103,4 +103,21 @@ class BookMarkHolderTest {
         Assertions.assertEquals(2, bookMarkHolder.getAssociatedBookMarksMap().size());
     }
 
+    @Test
+    void shouldRemoveTagWhenPresent() {
+        BookMarkHolder bookMarkHolder = new BookMarkHolder();
+        bookMarkHolder.addBookmark(TestDataGenerator.getValidBookmarkWithTag());
+
+        bookMarkHolder.removeTag(0);
+        Assertions.assertNull(bookMarkHolder.getBookmarks().get(0).getCustomUrl().getTag());
+    }
+
+    @Test
+    void shouldThrowUnsupportedOperationExceptionWhenBookmarkIsOutOfIndex() {
+        BookMarkHolder bookMarkHolder = new BookMarkHolder();
+
+        UnsupportedOperationException ex = Assertions.assertThrows(UnsupportedOperationException.class, () -> bookMarkHolder.removeTag(0));
+        Assertions.assertEquals("Out of index", ex.getMessage());
+    }
+
 }

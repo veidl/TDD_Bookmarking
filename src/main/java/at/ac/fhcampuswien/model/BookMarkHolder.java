@@ -58,4 +58,12 @@ public class BookMarkHolder {
         return this.associatedBookmarks;
 
     }
+
+    public void removeTag(int i) {
+        if(i >= this.bookMarks.size()) {
+            throw new UnsupportedOperationException("Out of index");
+        }
+
+        this.bookMarks.get(i).getCustomUrl().setTag(null);
+    }
 }
