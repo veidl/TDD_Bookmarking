@@ -113,10 +113,28 @@ class BookMarkHolderTest {
     }
 
     @Test
-    void shouldThrowUnsupportedOperationExceptionWhenBookmarkIsOutOfIndex() {
+    void shouldThrowUnsupportedOperationExceptionWhenBookmarkIsOutOfIndexWhenRemovingTag() {
         BookMarkHolder bookMarkHolder = new BookMarkHolder();
 
         UnsupportedOperationException ex = Assertions.assertThrows(UnsupportedOperationException.class, () -> bookMarkHolder.removeTag(0));
+        Assertions.assertEquals("Out of index", ex.getMessage());
+    }
+
+    @Test
+    void shouldRemoveURLWhenPresent() {
+        BookMarkHolder bookMarkHolder = new BookMarkHolder();
+        bookMarkHolder.addBookmark(TestDataGenerator.getValidBookmarkWithTag());
+
+        bookMarkHolder.removeURL(0);
+        Assertions.assertNull(bookMarkHolder.getBookmarks().get(0).getCustomUrl().getUrl());
+
+    }
+
+    @Test
+    void shouldThrowUnsupportedOperationExceptionWhenBookmarkIsOutOfIndexWhenRemovingURL() {
+        BookMarkHolder bookMarkHolder = new BookMarkHolder();
+
+        UnsupportedOperationException ex = Assertions.assertThrows(UnsupportedOperationException.class, () -> bookMarkHolder.removeURL(0));
         Assertions.assertEquals("Out of index", ex.getMessage());
     }
 

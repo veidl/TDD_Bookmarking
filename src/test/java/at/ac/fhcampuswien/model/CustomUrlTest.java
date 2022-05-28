@@ -39,4 +39,13 @@ class CustomUrlTest {
 
         Assertions.assertEquals(tag, customUrl.getTag());
     }
+
+    @Test
+    void shouldRemoveURL() {
+        CustomUrl customUrl = new CustomUrl();
+        customUrl.setUrl("https://facebook.com");
+
+        customUrl.removeURL();
+        Assertions.assertNull(customUrl.getUrl());
+    }
 }
