@@ -42,8 +42,9 @@ class BookmarkTest {
     void shouldAddTimestampToBookmark() {
         LocalDateTime time = LocalDateTime.now();
         Bookmark bookmark = new Bookmark(() -> time);
-        Assertions.assertEquals(bookmark.getTimestamp(), time);
+
+        bookmark.addTime();
+
+        Assertions.assertEquals(bookmark.getTimeStamp(), time);
     }
-
-
 }
