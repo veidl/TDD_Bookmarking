@@ -78,4 +78,10 @@ public class BookMarkHolder {
                 .collect(Collectors.toList());
 
     }
+
+    public List<Bookmark> getBookmarksSortedByDate() {
+        return this.bookMarks.stream()
+                .sorted(Comparator.comparing(Bookmark::getTimeStamp).reversed())
+                .collect(Collectors.toList());
+    }
 }

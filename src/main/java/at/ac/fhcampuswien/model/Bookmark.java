@@ -17,6 +17,7 @@ public class Bookmark {
 
     public Bookmark(final Supplier<LocalDateTime> supplier) {
         this.supplier = supplier;
+        this.addTime();
     }
 
     public int getRating() {
