@@ -38,6 +38,7 @@ class BookmarkTest {
         Assertions.assertEquals(1, bookmark.getRating());
     }
 
+    // usually I'd mock the clock - not sure if we are supposed to use mockito
     @Test
     void shouldAddTimestampToBookmark() {
         LocalDateTime time = LocalDateTime.now();
