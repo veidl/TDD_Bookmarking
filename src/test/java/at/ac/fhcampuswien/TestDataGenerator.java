@@ -3,7 +3,11 @@ package at.ac.fhcampuswien;
 import at.ac.fhcampuswien.model.Bookmark;
 import at.ac.fhcampuswien.model.CustomUrl;
 
+import java.time.LocalDateTime;
+
 public class TestDataGenerator {
+
+    public static LocalDateTime STATIC_DATE = LocalDateTime.of(1997, 2, 1, 10, 10);
 
     public static Bookmark getValidBookmarkWithTag() {
         CustomUrl customUrl = new CustomUrl();
@@ -21,7 +25,8 @@ public class TestDataGenerator {
         customUrl.setUrl(url);
         customUrl.setTag(tag);
 
-        Bookmark bookmark = new Bookmark();
+        Bookmark bookmark = new Bookmark(() -> STATIC_DATE);
+        bookmark.addTime();
         bookmark.setCustomUrl(customUrl);
         return bookmark;
     }
