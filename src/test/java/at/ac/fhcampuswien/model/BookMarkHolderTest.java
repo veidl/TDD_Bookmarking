@@ -138,4 +138,17 @@ class BookMarkHolderTest {
         Assertions.assertEquals("Out of index", ex.getMessage());
     }
 
+    @Test
+    void shouldRetrieveBookmarksSortedByRating() {
+        BookMarkHolder bookMarkHolder = new BookMarkHolder();
+        Bookmark validBookmarkWithTag = TestDataGenerator.getValidBookmarkWithTag();
+        validBookmarkWithTag.increaseRating();
+        bookMarkHolder.addBookmark(validBookmarkWithTag);
+        bookMarkHolder.addBookmark(TestDataGenerator.getCustomBookmark("https://google.at/mySubDirectory", "mySecondTag"));
+
+        Assertions.assertEquals(2, bookMarkHolder.getBookMarkCount());
+        Assertions.assertEquals(1, bookMarkHolder.getBookmarksSortedByRating().get(0).getRating());
+        Assertions.assertEquals(validBookmarkWithTag, bookMarkHolder.getBookmarksSortedByRating().get(0));
+    }
+
 }
