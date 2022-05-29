@@ -28,6 +28,8 @@ public class CustomUserTest {
         Bookmark validBookmarkWithTag = TestDataGenerator.getValidBookmarkWithTag();
         bookMarkHolder.addBookmark(validBookmarkWithTag);
 
+        user.addBookmarkHolder(bookMarkHolder);
+
         Assertions.assertNotNull(user.getMyBookmarks());
         Assertions.assertEquals(1, user.getMyBookmarks().getBookmarks().size());
         Assertions.assertEquals(validBookmarkWithTag, user.getMyBookmarks().getBookmarks().get(0));
