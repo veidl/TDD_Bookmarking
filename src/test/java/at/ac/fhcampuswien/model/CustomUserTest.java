@@ -7,7 +7,7 @@ public class CustomUserTest {
 
     @Test
     void shouldCreateUser() {
-        CustomUser user = new CustomUser();
+        CustomUser user = new CustomUser("init");
         Assertions.assertNotNull(user);
     }
 
