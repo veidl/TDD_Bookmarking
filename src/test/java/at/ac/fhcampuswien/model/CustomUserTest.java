@@ -8,6 +8,6 @@ public class CustomUserTest {
     @Test
     void shouldCreateUser() {
         CustomUser user = new CustomUser();
-        Assertions.assertNull(user);
+        Assertions.assertNotNull(user);
     }
 }
