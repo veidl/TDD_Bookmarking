@@ -10,4 +10,12 @@ public class CustomUserTest {
         CustomUser user = new CustomUser();
         Assertions.assertNotNull(user);
     }
+
+    @Test
+    void shouldCreateUserWithNameAndUniqueId() {
+        CustomUser customUser = new CustomUser("thomas");
+
+        Assertions.assertNotNull(customUser.getId());
+        Assertions.assertEquals("thomas", customUser.getUserName());
+    }
 }
