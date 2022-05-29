@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.time.LocalDateTime;
+
 class BookmarkTest {
 
     @Test
@@ -36,5 +38,14 @@ class BookmarkTest {
         Assertions.assertEquals(1, bookmark.getRating());
     }
 
+    // usually I'd mock the clock - not sure if we are supposed to use mockito
+    @Test
+    void shouldAddTimestampToBookmark() {
+        LocalDateTime time = LocalDateTime.now();
+        Bookmark bookmark = new Bookmark(() -> time);
 
+        bookmark.addTime();
+
+        Assertions.assertEquals(bookmark.getTimeStamp(), time);
+    }
 }
