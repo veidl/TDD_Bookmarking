@@ -1,5 +1,6 @@
 package at.ac.fhcampuswien.model;
 
+import at.ac.fhcampuswien.TestDataGenerator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -17,5 +18,18 @@ public class CustomUserTest {
 
         Assertions.assertNotNull(customUser.getId());
         Assertions.assertEquals("thomas", customUser.getUserName());
+    }
+
+    @Test
+    void shouldSupportBookmarksForEachUser() {
+        CustomUser user = new CustomUser("oliver");
+        BookMarkHolder bookMarkHolder = new BookMarkHolder();
+
+        Bookmark validBookmarkWithTag = TestDataGenerator.getValidBookmarkWithTag();
+        bookMarkHolder.addBookmark(validBookmarkWithTag);
+
+        Assertions.assertNotNull(user.getMyBookmarks());
+        Assertions.assertEquals(1, user.getMyBookmarks().getBookmarks().size());
+        Assertions.assertEquals(validBookmarkWithTag, user.getMyBookmarks().getBookmarks().get(0));
     }
 }
