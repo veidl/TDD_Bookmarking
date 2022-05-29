@@ -151,4 +151,17 @@ class BookMarkHolderTest {
         Assertions.assertEquals(validBookmarkWithTag, bookMarkHolder.getBookmarksSortedByRating().get(0));
     }
 
+    @Test
+    void shouldRetrieveBookmarksSortedByDate() {
+        BookMarkHolder bookMarkHolder = new BookMarkHolder();
+        Bookmark validBookmarkWithTag = TestDataGenerator.getValidBookmarkWithTag();
+        validBookmarkWithTag.increaseRating();
+        bookMarkHolder.addBookmark(validBookmarkWithTag);
+        bookMarkHolder.addBookmark(TestDataGenerator.getCustomBookmark("https://google.at/mySubDirectory", "mySecondTag"));
+
+        Assertions.assertEquals(2, bookMarkHolder.getBookMarkCount());
+        Assertions.assertEquals(TestDataGenerator.STATIC_DATE, bookMarkHolder.getBookmarksSortedByDate().get(1).getTimeStamp());
+        Assertions.assertEquals(validBookmarkWithTag, bookMarkHolder.getBookmarksSortedByDate().get(0));
+    }
+
 }
