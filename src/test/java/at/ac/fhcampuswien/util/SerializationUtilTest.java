@@ -4,10 +4,7 @@ import at.ac.fhcampuswien.TestDataGenerator;
 import at.ac.fhcampuswien.model.BookMarkHolder;
 import at.ac.fhcampuswien.model.Bookmark;
 import at.ac.fhcampuswien.model.CustomUser;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.io.File;
 import java.lang.reflect.Constructor;
@@ -17,6 +14,7 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.UUID;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class SerializationUtilTest {
 
     public static final File FILE = new File(Objects.requireNonNull(SerializationUtil.class.getClassLoader().getResource(".")).getFile() + "/backups");
@@ -28,8 +26,10 @@ class SerializationUtilTest {
 
     @AfterAll
     static void cleanUp() {
-        Arrays.stream(Objects.requireNonNull(FILE.list())).forEach(file -> new File(FILE.getPath() + "/" + file).delete());
-        FILE.delete();
+        if(FILE.exists()) {
+            Arrays.stream(Objects.requireNonNull(FILE.list())).forEach(file -> new File(FILE.getPath() + "/" + file).delete());
+            FILE.delete();
+        }
     }
 
     @Test
@@ -41,6 +41,7 @@ class SerializationUtilTest {
     }
 
     @Test
+    @Order(1)
     void shouldBackupUser() {
         CustomUser thomas = new CustomUser("thomas");
 
@@ -57,12 +58,14 @@ class SerializationUtilTest {
 
     @Test
     void shouldThrowUnsupportedOperationExceptionIfNoBookmarksArePresent() {
+        CustomUser user = new CustomUser("not gonna work");
         UnsupportedOperationException exception = Assertions.assertThrows(UnsupportedOperationException.class,
-                () -> SerializationUtil.backup(new CustomUser("not gonna work")));
+                () -> SerializationUtil.backup(user));
         Assertions.assertEquals("Cannot backup user", exception.getMessage());
     }
 
     @Test
+    @Order(2)
     void shouldRestoreBackedUpUser() {
         CustomUser user = new CustomUser("oliver");
         BookMarkHolder bookMarkHolder = new BookMarkHolder();
@@ -84,8 +87,22 @@ class SerializationUtilTest {
 
     @Test
     void shouldThrowUnsupportedOperationExceptionIfNoUserWasBackedUpped() {
+        UUID uuid = UUID.randomUUID();
         UnsupportedOperationException exception = Assertions.assertThrows(UnsupportedOperationException.class,
-                () -> SerializationUtil.restore(UUID.randomUUID()));
+                () -> SerializationUtil.restore(uuid));
         Assertions.assertEquals("Cannot restore User", exception.getMessage());
+    }
+
+    @Test
+    void shouldThrowUnsupportedOperationExceptionIfNoFileAlreadyExists() {
+        CustomUser thomas = new CustomUser("thomas");
+
+        BookMarkHolder bookMarkHolder = new BookMarkHolder();
+        bookMarkHolder.addBookmark(TestDataGenerator.getValidBookmarkWithTag());
+
+        thomas.addBookmarkHolder(bookMarkHolder);
+        cleanUp();
+        UnsupportedOperationException ex = Assertions.assertThrows(UnsupportedOperationException.class, () -> SerializationUtil.backup(thomas));
+        Assertions.assertEquals("Cannot backup user", ex.getMessage());
     }
 }
