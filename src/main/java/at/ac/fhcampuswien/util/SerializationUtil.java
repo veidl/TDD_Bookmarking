@@ -9,6 +9,10 @@ import java.util.Objects;
 
 public class SerializationUtil {
 
+    private SerializationUtil() {
+        // intentionally empty
+    }
+
     public static void backup(CustomUser user) {
 
         File file = new File(Objects.requireNonNull(SerializationUtil.class.getClassLoader().getResource(".")).getFile() + "/backups/" + user.getId() + ".ser");

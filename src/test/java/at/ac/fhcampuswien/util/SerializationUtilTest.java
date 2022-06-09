@@ -9,10 +9,13 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class SerializationUtilTest {
+class SerializationUtilTest {
 
     public static final File FILE = new File(Objects.requireNonNull(SerializationUtil.class.getClassLoader().getResource(".")).getFile() + "/backups");
     @BeforeAll
@@ -24,6 +27,14 @@ public class SerializationUtilTest {
     static void cleanUp() {
         Arrays.stream(Objects.requireNonNull(FILE.list())).forEach(file -> new File(FILE.getPath() + "/" + file).delete());
         FILE.delete();
+    }
+
+    @Test
+    void shouldCreateUrlValidator() throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+        Constructor<SerializationUtil> constructor = SerializationUtil.class.getDeclaredConstructor();
+        Assertions.assertTrue(Modifier.isPrivate(constructor.getModifiers()));
+        constructor.setAccessible(true);
+        constructor.newInstance();
     }
 
     @Test
@@ -39,5 +50,12 @@ public class SerializationUtilTest {
         File file = new File(Objects.requireNonNull(SerializationUtil.class.getClassLoader().getResource(".")).getFile() + "/backups/" + thomas.getId() + ".ser");
 
         Assertions.assertTrue(file.exists());
+    }
+
+    @Test
+    void shouldThrowUnsupportedOperationExceptionIfNoBookmarksArePresent() {
+        UnsupportedOperationException exception = Assertions.assertThrows(UnsupportedOperationException.class,
+                () -> SerializationUtil.backup(new CustomUser("not gonna work")));
+        Assertions.assertEquals("Cannot backup user", exception.getMessage());
     }
 }
