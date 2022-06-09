@@ -2,6 +2,7 @@ package at.ac.fhcampuswien.util;
 
 import at.ac.fhcampuswien.TestDataGenerator;
 import at.ac.fhcampuswien.model.BookMarkHolder;
+import at.ac.fhcampuswien.model.Bookmark;
 import at.ac.fhcampuswien.model.CustomUser;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
@@ -72,6 +73,11 @@ class SerializationUtilTest {
         CustomUser restoredUser = SerializationUtil.restore(user.getId());
 
         Assertions.assertEquals(user.getUserName(), restoredUser.getUserName());
-        Assertions.assertEquals(user.getMyBookmarks(), restoredUser.getMyBookmarks());
+        Bookmark restoredBookmark = user.getMyBookmarks().getBookmarks().get(0);
+        Assertions.assertNotNull(restoredBookmark);
+        Assertions.assertEquals(restoredBookmark.getTimeStamp(), user.getMyBookmarks().getBookmarks().get(0).getTimeStamp());
+        Assertions.assertEquals(restoredBookmark.getRating(), user.getMyBookmarks().getBookmarks().get(0).getRating());
+        Assertions.assertEquals(restoredBookmark.getCustomUrl().getUrl(), user.getMyBookmarks().getBookmarks().get(0).getCustomUrl().getUrl());
+        Assertions.assertEquals(restoredBookmark.getCustomUrl().getTag(), user.getMyBookmarks().getBookmarks().get(0).getCustomUrl().getTag());
     }
 }
