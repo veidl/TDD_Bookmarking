@@ -15,6 +15,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.UUID;
 
 class SerializationUtilTest {
 
@@ -79,5 +80,12 @@ class SerializationUtilTest {
         Assertions.assertEquals(restoredBookmark.getRating(), user.getMyBookmarks().getBookmarks().get(0).getRating());
         Assertions.assertEquals(restoredBookmark.getCustomUrl().getUrl(), user.getMyBookmarks().getBookmarks().get(0).getCustomUrl().getUrl());
         Assertions.assertEquals(restoredBookmark.getCustomUrl().getTag(), user.getMyBookmarks().getBookmarks().get(0).getCustomUrl().getTag());
+    }
+
+    @Test
+    void shouldThrowUnsupportedOperationExceptionIfNoUserWasBackedUpped() {
+        UnsupportedOperationException exception = Assertions.assertThrows(UnsupportedOperationException.class,
+                () -> SerializationUtil.restore(UUID.randomUUID()));
+        Assertions.assertEquals("Cannot restore User", exception.getMessage());
     }
 }
