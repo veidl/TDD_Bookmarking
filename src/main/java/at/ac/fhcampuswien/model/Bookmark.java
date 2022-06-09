@@ -1,11 +1,12 @@
 package at.ac.fhcampuswien.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.function.Supplier;
 
-public class Bookmark {
+public class Bookmark implements Serializable {
 
-    private final Supplier<LocalDateTime> supplier;
+    private transient final Supplier<LocalDateTime> supplier;
     private CustomUrl url;
     private int rating;
     private LocalDateTime timeStamp;

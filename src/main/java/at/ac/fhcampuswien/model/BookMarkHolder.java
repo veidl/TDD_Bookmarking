@@ -3,12 +3,13 @@ package at.ac.fhcampuswien.model;
 import at.ac.fhcampuswien.util.BookmarkValidator;
 import at.ac.fhcampuswien.util.UrlValidator;
 
+import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class BookMarkHolder {
+public class BookMarkHolder implements Serializable {
     private final List<Bookmark> bookMarks;
-    private final Map<Bookmark, Bookmark> associatedBookmarks;
+    private final transient Map<Bookmark, Bookmark> associatedBookmarks;
 
     public BookMarkHolder() {
         this.associatedBookmarks = new HashMap<>();
