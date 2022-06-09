@@ -18,6 +18,7 @@ import java.util.Objects;
 class SerializationUtilTest {
 
     public static final File FILE = new File(Objects.requireNonNull(SerializationUtil.class.getClassLoader().getResource(".")).getFile() + "/backups");
+
     @BeforeAll
     static void initFolder() {
         FILE.mkdir();
@@ -57,5 +58,20 @@ class SerializationUtilTest {
         UnsupportedOperationException exception = Assertions.assertThrows(UnsupportedOperationException.class,
                 () -> SerializationUtil.backup(new CustomUser("not gonna work")));
         Assertions.assertEquals("Cannot backup user", exception.getMessage());
+    }
+
+    @Test
+    void shouldRestoreBackedUpUser() {
+        CustomUser user = new CustomUser("oliver");
+        BookMarkHolder bookMarkHolder = new BookMarkHolder();
+        bookMarkHolder.addBookmark(TestDataGenerator.getValidBookmarkWithTag());
+
+        user.addBookmarkHolder(bookMarkHolder);
+        SerializationUtil.backup(user);
+
+        CustomUser restoredUser = SerializationUtil.restore(user.getId());
+
+        Assertions.assertEquals(user.getUserName(), restoredUser.getUserName());
+        Assertions.assertEquals(user.getMyBookmarks(), restoredUser.getMyBookmarks());
     }
 }
