@@ -74,7 +74,7 @@ class SerializationUtilTest {
         CustomUser restoredUser = SerializationUtil.restore(user.getId());
 
         Assertions.assertEquals(user.getUserName(), restoredUser.getUserName());
-        Bookmark restoredBookmark = user.getMyBookmarks().getBookmarks().get(0);
+        Bookmark restoredBookmark = restoredUser.getMyBookmarks().getBookmarks().get(0);
         Assertions.assertNotNull(restoredBookmark);
         Assertions.assertEquals(restoredBookmark.getTimeStamp(), user.getMyBookmarks().getBookmarks().get(0).getTimeStamp());
         Assertions.assertEquals(restoredBookmark.getRating(), user.getMyBookmarks().getBookmarks().get(0).getRating());
