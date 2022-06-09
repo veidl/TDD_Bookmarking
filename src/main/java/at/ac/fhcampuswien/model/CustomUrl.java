@@ -2,7 +2,9 @@ package at.ac.fhcampuswien.model;
 
 import at.ac.fhcampuswien.util.UrlValidator;
 
-public class CustomUrl {
+import java.io.Serializable;
+
+public class CustomUrl implements Serializable {
 
     String url;
     String tag;
