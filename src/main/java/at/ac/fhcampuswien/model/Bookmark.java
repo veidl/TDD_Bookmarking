@@ -6,7 +6,7 @@ import java.util.function.Supplier;
 
 public class Bookmark implements Serializable {
 
-    private transient final Supplier<LocalDateTime> supplier;
+    private final transient Supplier<LocalDateTime> supplier;
     private CustomUrl url;
     private int rating;
     private LocalDateTime timeStamp;

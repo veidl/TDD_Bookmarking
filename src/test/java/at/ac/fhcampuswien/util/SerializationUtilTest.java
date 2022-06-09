@@ -57,8 +57,9 @@ class SerializationUtilTest {
 
     @Test
     void shouldThrowUnsupportedOperationExceptionIfNoBookmarksArePresent() {
+        CustomUser user = new CustomUser("not gonna work");
         UnsupportedOperationException exception = Assertions.assertThrows(UnsupportedOperationException.class,
-                () -> SerializationUtil.backup(new CustomUser("not gonna work")));
+                () -> SerializationUtil.backup(user));
         Assertions.assertEquals("Cannot backup user", exception.getMessage());
     }
 
@@ -84,8 +85,9 @@ class SerializationUtilTest {
 
     @Test
     void shouldThrowUnsupportedOperationExceptionIfNoUserWasBackedUpped() {
+        UUID uuid = UUID.randomUUID();
         UnsupportedOperationException exception = Assertions.assertThrows(UnsupportedOperationException.class,
-                () -> SerializationUtil.restore(UUID.randomUUID()));
+                () -> SerializationUtil.restore(uuid));
         Assertions.assertEquals("Cannot restore User", exception.getMessage());
     }
 }

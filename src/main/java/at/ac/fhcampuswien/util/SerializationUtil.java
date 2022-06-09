@@ -22,10 +22,12 @@ public class SerializationUtil {
         try (FileOutputStream fos = new FileOutputStream(file);
              ObjectOutputStream oos = new ObjectOutputStream(fos)) {
 
-            file.createNewFile();
-            oos.writeUTF(user.getUserName());
-            oos.writeObject(user.getMyBookmarks().getBookmarks());
-
+            if(file.createNewFile()) {
+                oos.writeUTF(user.getUserName());
+                oos.writeObject(user.getMyBookmarks().getBookmarks());
+            } else {
+                throw new UnsupportedOperationException("File already exists");
+            }
         } catch (Exception e) {
             throw new UnsupportedOperationException("Cannot backup user");
         }

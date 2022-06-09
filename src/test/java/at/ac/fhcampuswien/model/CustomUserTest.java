@@ -4,7 +4,7 @@ import at.ac.fhcampuswien.TestDataGenerator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class CustomUserTest {
+class CustomUserTest {
 
     @Test
     void shouldCreateUser() {
